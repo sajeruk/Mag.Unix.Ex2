@@ -1,0 +1,5 @@
+main 4 do1 do2
+do1 3 sleep
+sleep 10
+do2 1 
+job 2 main
