@@ -52,8 +52,8 @@ declare -A Dependencies
 declare -A TotalJobLength
 
 if [ "$#" -ge 2 ]; then
-    echo "Too many arguments" 2>&1
-    usage 2>&1
+    echo "Too many arguments" 1>&2
+    usage 1>&2
     exit 1
 fi
 
@@ -65,8 +65,8 @@ case "$1" in
     '' )
         ;;
     * )
-        echo "Wrong argument provided: $1" 2>&1
-        usage 2>&1
+        echo "Wrong argument provided: $1" 1>&2
+        usage 1>&2
         exit 1
 esac
 
@@ -77,8 +77,8 @@ while IFS='' read -r line || [ -n "$line" ]; do
 done <&0
 
 if echo -e "$MakeFile" | make -f - -s 2>&1 | grep -q "Circular.*dependency dropped"; then
-    echo "Cyclic dependency" 2>&1
+    echo "Cyclic dependency" 1>&2
     exit 1
 fi
 
-echo "$(val job)"
+val job
